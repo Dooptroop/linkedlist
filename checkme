@@ -1,0 +1,5 @@
+ char *testDest = tmp->head->data;
+     ofstream ofs;
+ ofs.open( "output.txt", ios::text );
+ ofs.write( (char*)testDest, 256 );    
+ ofs.close();

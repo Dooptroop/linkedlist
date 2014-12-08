@@ -1,0 +1,83 @@
+ void addByValue(LinkedList list, LinkedList list2){
+        int digits = list.NumDigits(n);
+        int rem;
+        Node *L = head;
+
+        
+
+
+        if(digits<=1){
+            cout << endl << "first if:" << endl;
+            rem = list.popValue();
+            cout << "first if:rem=:"<< rem << endl;
+            rem += n;
+            cout << "first if:rem+=n=:"<< rem << endl;
+            list.addValue(rem);
+
+        } else {
+            
+            LinkedList temp;
+            
+            int divi=1;
+            int hold;
+            int add, rem;
+            cout << endl << "else:enter forloop:" << endl;
+            for(int i=0; i<digits; i++){
+                if(rem== -1){break;}
+                if(i>0){divi *= 10;}// creates the divisor
+                cout << "divi:" << divi << endl;
+                cout << "hold:" << hold << endl;
+
+                
+                
+                    if(i==0){
+                        hold = list.popValue();
+                        cout << "first pop =:" << hold << endl;
+                    } else {hold += list.popValue();
+                            cout << "not first pop +=:" << hold << endl;
+                    }
+                    
+                    add = n%=divi; 
+                    rem = n/divi;
+
+                    cout << "add:" << add << endl;
+                    cout << "rem:" << rem << endl;
+                    if(rem==0){
+                        rem = -1;
+                        cout << "EXIT:" << rem << endl;
+                    }// -1 will be an exit check
+
+
+
+                    if(hold+add>9){
+                        hold+=add;
+                        cout << " if > 9 hold:" << hold << endl;
+                        temp.addValue(hold%divi);
+                        hold/=divi;
+                        cout << "hold after /= divi:" << hold << endl;
+                        n=rem;
+                        cout << "n:" << n << endl;
+                    } else {
+                        hold+=add;
+                        cout << " else n !> 9 hold:" << hold << endl;
+                        temp.addValue(hold);
+                    }
+                   
+                    cout << " temp.add:" << (hold+(n/divi)) << endl;
+
+                    temp.addValue(hold+(n/divi));
+                    n%=divi;
+                    cout << " n:" << n << endl;
+
+                    
+                
+            }
+            for(int i=0; i<digits; i++){
+                list.addValue(temp.popValue());
+            }
+
+
+        }
+        
+
+    }
