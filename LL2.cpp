@@ -123,15 +123,10 @@ private:
 static LinkedList addList(LinkedList one, LinkedList two, LinkedList RESULT){
         LinkedList tmp, tmp2;
         int val1,val2,rem=0;
-        cout << endl << "start ADDLIST() digits: " << one.digits << endl;
         int j = one.digits;
         int k = two.digits;
         for(int i=0;i<j;i++){
-            cout << i << " LOOP" << endl;
             val1 = one.popValue();
-            //val2 = two.popValue();
-        
-
             //
             // Case if no more digits in 2nd list.
             //
@@ -140,31 +135,21 @@ static LinkedList addList(LinkedList one, LinkedList two, LinkedList RESULT){
             } else{
                 val2 = two.popValue();
             }
-
-            
             if( (val1+val2+rem) >= 10){
-                
                 rem = (val1+val2)%10;
-                
                 RESULT.addValue(rem);
-
-                cout << "Val1: " << val1 << " - Val2: " << val2 << " Rem: " << rem << " carry 1" << endl;
-
                 rem = 1;
-
             } else{
                 RESULT.addValue(val1+val2+rem);
                 rem = 0;
-                cout << "Val1: " << val1 << " - Val2: " << val2 << " Rem: " << rem << endl;
             }
-       
     }
+    return RESULT;
+}// end addList
 
- return RESULT;
-}
 static LinkedList multiply(LinkedList one, LinkedList two, LinkedList RESULT){
      LinkedList tmp, tmp2, res;
-     int val1,val2,hold,rem=0;
+     int val1,val2,hold,sum,rem=0;
      int a = one.digits;
      int b = two.digits;
      int i, j, tI; // counters
@@ -188,13 +173,13 @@ static LinkedList multiply(LinkedList one, LinkedList two, LinkedList RESULT){
                     else{tmp2.addValue(sum);}
                 }
             }
-            if(tI=1){
+            if(tI==1){
                 if(res.isEmpty()){
                     res = addList(tmp,tmp2,RESULT);
                 } else {
-                    RESULT = addList(tmp,tm2,RESULT);
+                    RESULT = addList(tmp,tmp2,RESULT);
                     RESULT = addList(res, RESULT, RESULT);
-                    res->next=NULL;
+                    
                 }
                 
                 tI=0;
@@ -251,7 +236,7 @@ int main() {
     list.readValues();
     list2.readValues();
 
-    RESULT = addList(list, list2, RESULT);
+    RESULT = multiply(list, list2, RESULT);
     
     RESULT.readValues();
     int s = RESULT.readNode(1);
